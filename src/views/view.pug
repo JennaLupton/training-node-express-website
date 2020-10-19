@@ -9,12 +9,16 @@ block content
   .row
     .w-100
       .mb-3
+        h6 Description:
         p(id='short-description' name='short_description') #{recipe.short_description}
       .mb-3
-        p(id='preparation-time' name='preparation_time') Preparation time: #{recipe.preparation_time} minutes
+        h6 Preparation Time:
+        p(id='preparation-time' name='preparation_time') #{recipe.preparation_time} minutes
       .mb-3
         h6 Instructions:
         // TODO: Display recipe steps as a list of numbered instructions
         p(id='recipe-steps' name='recipe_steps') #{recipe.recipe_steps}
-      input.btn.btn-primary.btn-lg(value='Edit')
-    
+      .mb-3
+        h6 Ingredients:
+        p(id='recipe-ingredients' name='recipe_ingredients') #{recipe.recipe_ingredients}
+      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/edit` id='edit' name='edit') Edit

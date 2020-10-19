@@ -49,9 +49,27 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// Updates a recipe according to the ID supplied in the URL
-router.put('/:id', async (req, res) => {
-  res.send(await recipeController.updateRecipe(req.params.id, req.body));
+// Gets a recipe by the ID supplied in the URL and renders the edit page
+router.get('/:id/edit', async (req, res, next) => {
+  try {
+    const recipe = await recipeController.getRecipe(req.params.id);
+    if (!recipe) {
+      throw new NotFoundException('recipe not found');
+    }
+    res.render('edit', recipe);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Accepts the data submitted from the edit page and calls the controller to persist it
+router.post('/:id/edit', async (req, res, next) => {
+  try {
+    await recipeController.updateRecipe(req.params.id, req.body);
+    res.redirect('/recipes'); // Redirect to the list of recipes upon successful creation
+  } catch (err) {
+    next(new CustomException('Unable to update recipe', err));
+  }
 });
 
 module.exports = router;

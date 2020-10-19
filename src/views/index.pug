@@ -5,7 +5,7 @@ block header
 
 block content
   .py-3.text-center
-    h2.bd-title Pick a recipe
+    h2.bd-title Pick a Recipe
   .row
     table.table
       thead
@@ -20,4 +20,4 @@ block content
               a(href=`recipes/${recipe.recipe_id}` id='title' name='title') #{recipe.title}
             td(id='short-description' name='short_description') #{recipe.short_description}
             td(id='preparation-time' name='preparation_time') #{recipe.preparation_time}
-    
+  a.btn.btn-primary.btn-lg(href='recipes/create' id='create' name='create') Create a Recipe
