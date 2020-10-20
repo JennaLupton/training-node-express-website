@@ -4,10 +4,25 @@
 
 const axios = require('axios');
 
-const updateRecipeSteps = async (recipeId, recipeSteps) => {
-  return axios.patch(`http://localhost:3002/recipes/${recipeId}/recipe-steps`, recipeSteps);
+const createRecipeStep = async (recipeStep) => axios.post(`http://localhost:3002/recipes/${recipeStep.recipe_id}/recipe-steps`, recipeStep);
+
+const deleteRecipeStep = async (recipeId, stepId) => axios.delete(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`);
+
+const getRecipeSteps = async (recipeId, searchTerm) => {
+  const searchUrlPart = searchTerm ? `search=${searchTerm}` : '';
+  return axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-steps${searchUrlPart}`);
+};
+
+const getRecipeStep = async (recipeId, stepId) => axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`);
+
+const updateRecipeStep = async (recipeId, stepId, recipeStep) => {
+  return axios.put(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`, recipeStep)
 };
 
 module.exports = {
-  updateRecipeSteps,
+  createRecipeStep,
+  deleteRecipeStep,
+  getRecipeSteps,
+  getRecipeStep,
+  updateRecipeStep,
 };

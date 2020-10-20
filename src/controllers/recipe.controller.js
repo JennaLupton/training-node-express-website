@@ -24,9 +24,9 @@ const formatDescription = (description) => {
   return `${description.substring(0, 50)}...`;
 };
 
-const formatPreparation = (preparation_time) => {
-  const hours = Math.floor(preparation_time / 60);
-  const minutes = preparation_time % 60;
+const formatPreparation = (PreparationTime) => {
+  const hours = Math.floor(PreparationTime / 60);
+  const minutes = PreparationTime % 60;
   let result = ``;
   if (hours > 0) {
     result = `${hours} hour(s)`;

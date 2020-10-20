@@ -1,7 +1,7 @@
 extends layout.pug
 
 block header
-  title View recipe
+  title View Recipe
 
 block content
   .py-3.text-center
@@ -15,10 +15,19 @@ block content
         h6 Preparation Time:
         p(id='preparation-time' name='preparation_time') #{recipe.preparation_time} minutes
       .mb-3
-        h6 Instructions:
-        // TODO: Display recipe steps as a list of numbered instructions
-        p(id='recipe-steps' name='recipe_steps') #{recipe.recipe_steps}
-      .mb-3
         h6 Ingredients:
-        p(id='recipe-ingredients' name='recipe_ingredients') #{recipe.recipe_ingredients}
-      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/edit` id='edit' name='edit') Edit
+        each ingredient in recipe_ingredients
+          p(id='recipe-ingredients' name='recipe_ingredients') #{ingredient.name}
+            a.btn.btn-primary.btn-lg(href=`${ingredient.ingredient_id}/edit` id='edit' name='edit') Edit Ingredient
+            a.btn.btn-primary.btn-lg(href=`${ingredient.ingredient_id}/delete` id='delete' name='delete') Delete Ingredient
+      .mb-3
+        h6 Instructions:
+        each step in recipe_steps
+          p(id='recipe-steps' name='recipe_steps') #{step.step_number}. #{step.step_text}
+            a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/${step.step_number}/edit` id='edit' name='edit') Edit Step
+            a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/${step.step_number}/delete` id='delete' name='delete') Delete Step 
+      
+      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-ingredients/create` id='add-ingredient' name='add_ingredient') Add an Ingredient
+      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/create` id='add-step' name='add_step') Add a Step
+      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/edit` id='edit' name='edit') Edit Recipe
+      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/delete` id='delete' name='delete') Delete Recipe
