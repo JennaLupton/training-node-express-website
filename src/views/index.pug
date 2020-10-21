@@ -4,20 +4,22 @@ block header
   title Browse Recipes
 
 block content
-  .py-3.text-center
+  .my-4.text-center
     h2.bd-title Pick a Recipe
-  .row
-    table.table
-      thead
-        tr
-          th(scope='col') Title
-          th(scope='col') Description
-          th(scope='col') Preparation Time
-      tbody
-        each recipe in recipes
+  .my-4
+    .row
+      table.table
+        thead
           tr
-            td 
-              a(href=`recipes/${recipe.recipe_id}` id='title' name='title') #{recipe.title}
-            td(id='short-description' name='short_description') #{recipe.short_description}
-            td(id='preparation-time' name='preparation_time') #{recipe.preparation_time}
-  a.btn.btn-primary.btn-lg(href='recipes/create' id='create' name='create') Create a Recipe
+            th(scope='col') Title
+            th(scope='col') Description
+            th(scope='col') Preparation Time
+        tbody
+          each recipe in recipes
+            tr
+              td 
+                a(href=`recipes/${recipe.recipe_id}` id='title' name='title') #{recipe.title}
+              td(id='short-description' name='short_description') #{recipe.short_description}
+              td(id='preparation-time' name='preparation_time') #{recipe.preparation_time}
+  .my-4.text-center
+    a.btn.btn-primary.btn-lg(href='recipes/create' id='create' name='create') Create a Recipe

@@ -25,4 +25,6 @@ app.use('/recipes', recipeRouter);
 app.use(logger.logger);
 app.use(errorHandler.handler);
 
+app.use(express.static('public'));
+
 module.exports = { app };

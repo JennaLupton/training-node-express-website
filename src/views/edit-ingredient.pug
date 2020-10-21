@@ -1,0 +1,17 @@
+extends layout.pug
+
+block header
+  title Edit Ingredient
+
+block content
+  .py-3.text-center
+    h2.bd-title Edit Ingredient #{recipe_ingredient.name} for #{recipe.title}
+  .row
+    form.w-100.needs-validation(method='post')
+      .mb-3
+        label(for='ingredient-id') Ingredient Number
+        input.form-control(type='text' id='ingredient-id' name='ingredient_id' value=`${recipe_ingredient.ingredient_id}`)
+      .mb-3
+        label(for='name') Ingredient Name
+        textarea.form-control(id='name' name='name' rows='3' columns='30') #{recipe_ingredient.name}
+      input.btn.btn-primary.btn-lg(type='submit', value='Save')

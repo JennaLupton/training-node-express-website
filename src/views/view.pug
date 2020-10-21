@@ -4,30 +4,31 @@ block header
   title View Recipe
 
 block content
-  .py-3.text-center
+  .my-4.text-center
     h2.bd-title #{recipe.title}
   .row
     .w-100
-      .mb-3
-        h6 Description:
+      .my-4
+        h5 Description:
         p(id='short-description' name='short_description') #{recipe.short_description}
-      .mb-3
-        h6 Preparation Time:
+      .my-4
+        h5 Preparation Time:
         p(id='preparation-time' name='preparation_time') #{recipe.preparation_time} minutes
-      .mb-3
-        h6 Ingredients:
+      .my-4
+        h5 Ingredients:
         each ingredient in recipe_ingredients
-          p(id='recipe-ingredients' name='recipe_ingredients') #{ingredient.name}
-            a.btn.btn-primary.btn-lg(href=`${ingredient.ingredient_id}/edit` id='edit' name='edit') Edit Ingredient
-            a.btn.btn-primary.btn-lg(href=`${ingredient.ingredient_id}/delete` id='delete' name='delete') Delete Ingredient
-      .mb-3
-        h6 Instructions:
+          p(id='recipe-ingredients' name='recipe_ingredients') #{ingredient.ingredient_id}. #{ingredient.name}
+            a.btn.btn-danger.float-right.ml-1(href=`${recipe.recipe_id}/recipe-ingredients/${ingredient.recipe_ingredient_id}/delete` id='delete-ingredient' name='delete_ingredient') Delete Ingredient
+            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-ingredients/${ingredient.recipe_ingredient_id}/edit` id='edit-ingredient' name='edit_ingredient') Edit Ingredient
+        a.btn.btn-primary(href=`${recipe.recipe_id}/recipe-ingredients/create` id='add-ingredient' name='add_ingredient') Add an Ingredient
+      .my-4
+        h5 Instructions:
         each step in recipe_steps
           p(id='recipe-steps' name='recipe_steps') #{step.step_number}. #{step.step_text}
-            a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/${step.step_number}/edit` id='edit' name='edit') Edit Step
-            a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/${step.step_number}/delete` id='delete' name='delete') Delete Step 
-      
-      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-ingredients/create` id='add-ingredient' name='add_ingredient') Add an Ingredient
-      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/recipe-steps/create` id='add-step' name='add_step') Add a Step
-      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/edit` id='edit' name='edit') Edit Recipe
-      a.btn.btn-primary.btn-lg(href=`${recipe.recipe_id}/delete` id='delete' name='delete') Delete Recipe
+            a.btn.btn-danger.float-right.ml-1(href=`${recipe.recipe_id}/recipe-steps/${step.recipe_step_id}/delete` id='delete-step' name='delete_step') Delete Step
+            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-steps/${step.recipe_step_id}/edit` id='edit-step' name='edit_step') Edit Step
+        a.btn.btn-primary(href=`${recipe.recipe_id}/recipe-steps/create` id='add-step' name='add_step') Add a Step
+      .my-4.text-center
+        a.btn.btn-info.btn-lg.mx-2(href=`${recipe.recipe_id}/edit` id='edit-recipe' name='edit_recipe') Edit Recipe
+        a.btn.btn-danger.btn-lg.mx-2(href=`${recipe.recipe_id}/delete` id='delete-recipe' name='delete_recipe') Delete Recipe
+        a.btn.btn-primary.btn-lg.mx-2(href=`/recipes` id='index' name='index') Back to Index Page

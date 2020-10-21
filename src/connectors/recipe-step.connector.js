@@ -13,7 +13,10 @@ const getRecipeSteps = async (recipeId, searchTerm) => {
   return axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-steps${searchUrlPart}`);
 };
 
-const getRecipeStep = async (recipeId, stepId) => axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`);
+const getRecipeStep = async (recipeId, stepId) => {
+  const result = await axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`);
+  return result;
+};
 
 const updateRecipeStep = async (recipeId, stepId, recipeStep) => {
   return axios.put(`http://localhost:3002/recipes/${recipeId}/recipe-steps/${stepId}`, recipeStep)

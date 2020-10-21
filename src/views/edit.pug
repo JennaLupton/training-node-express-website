@@ -5,7 +5,7 @@ block header
 
 block content
   .py-3.text-center
-    h2.bd-title Edit a Recipe
+    h2.bd-title Edit Recipe for #{recipe.title}
   .row
     form.w-100.needs-validation(method='post')
       .mb-3
@@ -17,12 +17,4 @@ block content
       .mb-3
         label(for='preparation-time') Preparation time
         input.form-control(type='text' id='preparation-time' name='preparation_time' value=`${recipe.preparation_time}`)
-      .mb-3
-        label(for='ingredients') Ingredients
-        each ingredient in recipe_ingredients
-          textarea.form-control(id='recipe-ingredients' name='recipe_ingredients' rows='3' columns='30') #{ingredient.name}
-      .mb-3
-        label(for='recipe-steps') Recipe Steps
-        each step in recipe_steps
-          textarea.form-control(id='recipe-steps' name='recipe_steps' rows='3' columns='30') #{step.step_number}. #{step.step_text}
       input.btn.btn-primary.btn-lg(type='submit', value='Save')

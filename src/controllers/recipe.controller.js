@@ -1,22 +1,25 @@
 // There is some logic in this module but input validation should also go here
 
 const recipeConnector = require('../connectors/recipe.connector');
-const recipeStepConnector = require('../connectors/recipe-step.connector');
+// const recipeStepConnector = require('../connectors/recipe-step.connector');
 
 // Formats the posted data before passing to the connector
 const createRecipe = async (recipe) => {
-  const response = await recipeConnector.createRecipe(recipe);
-  const { lastID } = response.data;
+  await recipeConnector.createRecipe(recipe);
+};
+
+  // const response = await recipeConnector.createRecipe(recipe);
+  // const { lastID } = response.data;
 
   // Recipe instructions are split into their composite steps
-  const recipeSteps = recipe.recipe_steps
-    .split(/[\r\n]+/)
-    .map((p, i) => {
-      return { step_number: i + 1, step_text: p };
-    })
+  // const recipeSteps = recipe.recipe_steps
+    // .split(/[\r\n]+/)
+    // .map((p, i) => {
+      // return { step_number: i + 1, step_text: p };
+    // })
     // .filter((p) => !p.match(/\s*/));
-  await recipeStepConnector.updateRecipeSteps(lastID, recipeSteps);
-};
+  // await recipeStepConnector.updateRecipeSteps(lastID, recipeSteps);
+// };
 
 const deleteRecipe = async (id) => recipeConnector.deleteRecipe(id);
 

@@ -14,10 +14,13 @@ const getRecipeIngredients = async (recipeId, searchTerm) => {
   return axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-ingredients${searchUrlPart}`);
 };
 
-const getRecipeIngredient = async (recipeId, ingredientId) => axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-ingredients/${ingredientId}`);
+const getRecipeIngredient = async (recipeId, ingredientId) => {
+  const result = await axios.get(`http://localhost:3002/recipes/${recipeId}/recipe-ingredients/${ingredientId}`);
+  return result;
+};
 
-const updateRecipeIngredients = async (recipeId, recipeIngredient) => {
-  return axios.put(`http://localhost:3002/recipes/${recipeId}/recipe-ingredients`, recipeIngredient)
+const updateRecipeIngredient = async (recipeId, ingredientId, recipeIngredient) => {
+  return axios.put(`http://localhost:3002/recipes/${recipeId}/recipe-ingredients/${ingredientId}`, recipeIngredient)
 };
 
 module.exports = {
@@ -25,5 +28,5 @@ module.exports = {
   deleteRecipeIngredient,
   getRecipeIngredients,
   getRecipeIngredient,
-  updateRecipeIngredients,
+  updateRecipeIngredient,
 };

@@ -8,24 +8,27 @@ const createRecipeIngredient = async (recipeId, recipeIngredient) => {
 };
 
 const deleteRecipeIngredient = async (recipeId, ingredientId) => {
-  return recipeIngredientConnector.deleteRecipeIngredient(recipeId, ingredientId)};
+  await recipeIngredientConnector.deleteRecipeIngredient(recipeId, ingredientId)};
 
 const getRecipeIngredients = async (recipeId) =>
   (await recipeIngredientConnector.getRecipeIngredients(recipeId)).data.map(
     (recipeIngredients) => {
-      return {name: recipeIngredients.name};
+      return {name: recipeIngredients.name,
+              ingredient_id: recipeIngredients.ingredient_id,
+              recipe_ingredient_id: recipeIngredients.recipe_ingredient_id};
   });
 
 const getRecipeIngredient = async (recipeId, ingredientId) => {
-  return recipeIngredientConnector.getRecipeIngredient(recipeId, ingredientId)};
+  return recipeIngredientConnector.getRecipeIngredient(recipeId, ingredientId)
+};
 
-const updateRecipeIngredients = async (recipeId, recipeIngredient) => {
-  return recipeIngredientConnector.updateRecipeIngredients(recipeId, recipeIngredient)};
+const updateRecipeIngredient = async (recipeId, ingredientId, recipeIngredient) => {
+  await recipeIngredientConnector.updateRecipeIngredient(recipeId, ingredientId, recipeIngredient)};
 
 module.exports = {
   createRecipeIngredient,
   deleteRecipeIngredient,
   getRecipeIngredients,
   getRecipeIngredient,
-  updateRecipeIngredients,
+  updateRecipeIngredient,
 };
