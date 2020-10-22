@@ -89,8 +89,19 @@ router.get('/:id/delete', async (req, res, next) => {
 // Calls the controller to delete the recipe corresponding to the ID in the URL
 router.post('/:id/delete', async (req, res, next) => {
   try {
-    await recipeController.deleteRecipe(req.params.id);
-    res.redirect('/recipes'); // Redirect to the list of recipes upon successful recipe deletion
+    switch (req.accepts(['html', 'json'])) {
+      case 'html':
+        await recipeController.deleteRecipe(req.params.id);
+        res.redirect('/recipes'); // Redirect to the list of recipes upon successful recipe deletion
+        break;
+      case 'json':
+        // Respond with JSON
+        await recipeController.deleteRecipe(req.params.id);
+        res.json({});
+        break;
+      default:
+        res.status(400).send('Bad Request');
+    };
   } catch (err) {
       next(new CustomException('Unable to delete recipe', err));
     }
@@ -116,8 +127,19 @@ router.get('/:id/recipe-steps/:stepId/delete', async (req, res, next) => {
 // Calls the controller to delete the recipe step corresponding to the ID in the URL
 router.post('/:id/recipe-steps/:stepId/delete', async (req, res, next) => {
   try {
-    await recipeStepController.deleteRecipeStep(req.params.id, req.params.stepId);
-    res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful step deletion
+    switch (req.accepts(['html', 'json'])) {
+      case 'html':
+        await recipeStepController.deleteRecipeStep(req.params.id, req.params.stepId);
+        res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful step deletion
+        break;
+      case 'json':
+        // Respond with JSON
+        await recipeStepController.deleteRecipeStep(req.params.id, req.params.stepId);
+        res.json({});
+        break;
+      default:
+        res.status(400).send('Bad Request');
+    };
   } catch (err) {
       next(new CustomException('Unable to delete recipe step', err));
     }
@@ -144,8 +166,21 @@ router.get('/:id/recipe-ingredients/:ingredientId/delete', async (req, res, next
 // Calls the controller to delete the recipe ingredient corresponding to the ID in the URL
 router.post('/:id/recipe-ingredients/:ingredientId/delete', async (req, res, next) => {
   try {
-    await recipeIngredientController.deleteRecipeIngredient(req.params.id, req.params.ingredientId);
-    res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful ingredient deletion
+    switch (req.accepts(['html', 'json'])) {
+      case 'html':
+        await recipeIngredientController.deleteRecipeIngredient(
+          req.params.id, req.params.ingredientId);
+        res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful ingredient deletion
+        break;
+      case 'json':
+        // Respond with JSON
+        await recipeIngredientController.deleteRecipeIngredient(
+          req.params.id, req.params.ingredientId);
+        res.json({});
+        break;
+      default:
+        res.status(400).send('Bad Request');
+    };
   } catch (err) {
       next(new CustomException('Unable to delete recipe ingredient', err));
     }
