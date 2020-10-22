@@ -19,14 +19,14 @@ block content
         each ingredient in recipe_ingredients
           p(id='recipe-ingredients' name='recipe_ingredients') #{ingredient.ingredient_id}. #{ingredient.name}
             a.btn.btn-danger.float-right.ml-1(href=`${recipe.recipe_id}/recipe-ingredients/${ingredient.recipe_ingredient_id}/delete` class='delete-ingredient' name='delete_ingredient' data-recipeid=`${recipe.recipe_id}` data-ingredientid=`${ingredient.recipe_ingredient_id}`) Delete Ingredient
-            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-ingredients/${ingredient.recipe_ingredient_id}/edit` id='edit-ingredient' name='edit_ingredient') Edit Ingredient
+            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-ingredients/${ingredient.recipe_ingredient_id}/edit` class='edit-ingredient' name='edit_ingredient' data-recipeid=`${recipe.recipe_id}` data-ingredientid=`${ingredient.recipe_ingredient_id}`) Edit Ingredient
         a.btn.btn-primary(href=`${recipe.recipe_id}/recipe-ingredients/create` id='add-ingredient' name='add_ingredient') Add an Ingredient
       .my-4
         h5 Instructions:
         each step in recipe_steps
           p(id='recipe-steps' name='recipe_steps') #{step.step_number}. #{step.step_text}
             a.btn.btn-danger.float-right.ml-1(href=`${recipe.recipe_id}/recipe-steps/${step.recipe_step_id}/delete` class='delete-step' name='delete_step' data-recipeid=`${recipe.recipe_id}` data-stepid=`${step.recipe_step_id}`) Delete Step
-            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-steps/${step.recipe_step_id}/edit` id='edit-step' name='edit_step') Edit Step
+            a.btn.btn-info.float-right.ml-1(href=`${recipe.recipe_id}/recipe-steps/${step.recipe_step_id}/edit` class='edit-step' name='edit_step' data-recipeid=`${recipe.recipe_id}` data-stepid=`${step.recipe_step_id}`) Edit Step
         a.btn.btn-primary(href=`${recipe.recipe_id}/recipe-steps/create` id='add-step' name='add_step') Add a Step
       .my-4.text-center
         a.btn.btn-info.btn-lg.mx-2(href=`${recipe.recipe_id}/edit` id='edit-recipe' name='edit_recipe') Edit Recipe
@@ -41,7 +41,7 @@ block dialogs
           h5.modal-title(id='deleteRecipeDialogLabel') Delete Recipe
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
-        .modal.body Are you sure you want to delete this recipe?
+        .modal-body Are you sure you want to delete this recipe?
         .modal-footer
           button.btn.btn-secondary(type='bytton' data-dismiss='modal') Cancel
           button.btn.btn-danger(type='button' id='confirm-delete-recipe' data-recipeid=`${recipe.recipe_id}`) Delete
@@ -53,7 +53,7 @@ block dialogs
           h5.modal-title(id='deleteStepDialogLabel') Delete Step
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
-        .modal.body Are you sure you want to delete this step?
+        .modal-body Are you sure you want to delete this step?
         .modal-footer
           button.btn.btn-secondary(type='bytton' data-dismiss='modal') Cancel
           button.btn.btn-danger(type='button' id='confirm-delete-step') Delete
@@ -65,7 +65,27 @@ block dialogs
           h5.modal-title(id='deleteIngredientDialogLabel') Delete Ingredient
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
-        .modal.body Are you sure you want to delete this ingredient?
+        .modal-body Are you sure you want to delete this ingredient?
         .modal-footer
           button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
           button.btn.btn-danger(type='button' id='confirm-delete-ingredient') Delete
+  
+  .modal(id='editStepDialog' tabindex='-1' role='dialog' aria-labelledby='editStepDialogLabel' aria-hidden='true')
+    .form(method='post' id='edit-step-form')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            h5.modal-title(id='editStepDialogLabel') Edit Step
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .form-group
+              .mb-3
+                label(for='step-number') Step Number
+                input.form-control(type='text' id='step-number' name='step_number')
+              .mb-3
+                label(for='step-text') Step Text
+                textarea.form-control(id='step-text' name='step_text' rows='3' columns='30')
+          .modal-footer
+            button.btn.btn-secondary(type='bytton' data-dismiss='modal') Cancel
+            button.btn.btn-success(type='button' id='confirm-edit-step') Save

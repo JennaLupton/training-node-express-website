@@ -262,8 +262,19 @@ router.get('/:id/recipe-steps/:stepId/edit', async (req, res, next) => {
 // Accepts the data submitted from the edit step page and calls the controller to persist it
 router.post('/:id/recipe-steps/:stepId/edit', async (req, res, next) => {
   try {
-    await recipeStepController.updateRecipeStep(req.params.id, req.params.stepId, req.body);
-    res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful step editing
+    switch (req.accepts(['html', 'json'])) {
+      case 'html':
+        await recipeStepController.updateRecipeStep(req.params.id, req.params.stepId, req.body);
+        res.redirect(`/recipes/${req.params.id}`); // Redirect to the recipe view upon successful step editing
+        break;
+      case 'json':
+        // Respond with JSON
+        await recipeStepController.updateRecipeStep(req.params.id, req.params.stepId, req.body);
+        res.json({});
+        break;
+      default:
+        res.status(400).send('Bad Request');
+    };
   } catch (err) {
       next(new CustomException('Unable to update recipe step', err));
     }

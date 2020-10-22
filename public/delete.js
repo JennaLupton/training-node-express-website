@@ -1,3 +1,7 @@
+/* eslint-disable no-alert */
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
+
 // JQuery version to delete a recipe
 $('#delete-recipe').click((event) => {
     $('#deleteRecipeDialog').modal();
@@ -75,6 +79,7 @@ $().ready(() => {
 });
 */
 
-function deleteRecipe(recipeId) {
+/* function deleteRecipe(recipeId) {
     alert(`You've asked me to delete Recipe ${recipeId}!`);
 };
+*/
