@@ -1,8 +1,11 @@
+/* eslint-disable no-case-declarations */
+
 const express = require('express');
 const recipeIngredientController = require('../controllers/recipe-ingredient.controller');
 const recipeStepController = require('../controllers/recipe-step.controller');
 const recipeController = require('../controllers/recipe.controller');
 const { CustomException, NotFoundException } = require('../utils/errors');
+const { jsonify } = require('../utils/jsonify');
 
 const router = express.Router();
 
@@ -269,7 +272,13 @@ router.post('/:id/recipe-steps/:stepId/edit', async (req, res, next) => {
         break;
       case 'json':
         // Respond with JSON
-        await recipeStepController.updateRecipeStep(req.params.id, req.params.stepId, req.body);
+        const recipeStep = await recipeStepController.getRecipeStep(
+          req.params.id, req.params.stepId);
+        if (!recipeStep) {
+          throw new NotFoundException('Recipe step not found');
+        }
+        await recipeStepController.updateRecipeStep(
+          req.params.id, req.params.stepId, jsonify(JSON.parse(req.body.newStep)));
         res.json({});
         break;
       default:
